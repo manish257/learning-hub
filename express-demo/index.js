@@ -59,10 +59,31 @@ app.listen(port, () => console.log(`Listening on port ${port}...`));
 app.put('/api/courses/:id', (req, res) => {
     //Look up the course
     //If not existing, return 404
+    const course = courses.find((c) => c.id === parseInt(req.params.id));
+    if (!course) res.status(404).send("The course with given ID was not found");
 
-    //Validate
-    //If invalid, return 400 - Bad request
+    //const result = validateCourse(req.body);
+    const { error } = validateCourse(req.body); //result error
+    
+    if (error){
+        //400 Bad Request
+        res.status(400).send(result.error);
+        return;
+    }
+
 
     //Update course
+    course.name = req.body.name;
     //Return the updated course
+    res.send(course);
 });
+
+function validateCourse(course) {
+    //Validate
+    //If invalid, return 400 - Bad request
+    const schema = {
+        name: Joi.string().min(3).required()
+    };
+
+    return Joi.validate(course, schema);
+}
