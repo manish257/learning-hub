@@ -1,3 +1,4 @@
+const Joi = require('joi');
 const express = require("express");
 const app = express();
 
@@ -31,6 +32,19 @@ app.get("/api/posts/:year/:month", (req, res) => {
 
 
 app.post('/api/courses', (req, res) => {
+
+    const schema = {
+        name: Joi.string().min(3).required()
+    };
+
+    const result = Joi.validate(req.body, schema);
+
+    if (result.error){
+        //400 Bad Request
+        res.status(400).send(result.error);
+        return;
+    }
+
     const course = {
         id: courses.length + 1,
         name: req.body.name
@@ -41,3 +55,14 @@ app.post('/api/courses', (req, res) => {
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on port ${port}...`));
+
+app.put('/api/courses/:id', (req, res) => {
+    //Look up the course
+    //If not existing, return 404
+
+    //Validate
+    //If invalid, return 400 - Bad request
+
+    //Update course
+    //Return the updated course
+});
