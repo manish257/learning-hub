@@ -33,17 +33,25 @@ app.get("/api/posts/:year/:month", (req, res) => {
 
 app.post('/api/courses', (req, res) => {
 
-    const schema = {
-        name: Joi.string().min(3).required()
-    };
-
-    const result = Joi.validate(req.body, schema);
-
-    if (result.error){
+    const { error } = validateCourse(req.body); //result error
+    
+    if (error){
         //400 Bad Request
         res.status(400).send(result.error);
         return;
     }
+
+    // const schema = {
+    //     name: Joi.string().min(3).required()
+    // };
+
+    // const result = Joi.validate(req.body, schema);
+
+    // if (result.error){
+    //     //400 Bad Request
+    //     res.status(400).send(result.error);
+    //     return;
+    // }
 
     const course = {
         id: courses.length + 1,
