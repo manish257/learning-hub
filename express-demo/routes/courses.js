@@ -7,22 +7,22 @@ const courses = [
   { id: 1, name: "course2" },
   { id: 1, name: "course3" },
 ];
-router.get("/api/courses", (req, res) => {
+router.get("/", (req, res) => {
     res.send([1, 2, 3]);
   });
   
-  router.get("/api/courses/:id", (req, res) => {
+  router.get("/:id", (req, res) => {
     const course = courses.find((c) => c.id === parseInt(req.params.id));
     if (!course) res.status(404).send("The course with given ID was not found");
     res.send(course);
   });
   
-  router.get("/api/posts/:year/:month", (req, res) => {
-    res.send(req.query);
-  });
+//   router.get("/api/posts/:year/:month", (req, res) => {
+//     res.send(req.query);
+//   });
   
 
-router.post('/api/courses', (req, res) => {
+router.post('/', (req, res) => {
 
     const { error } = validateCourse(req.body); //result error
     
@@ -49,7 +49,7 @@ router.post('/api/courses', (req, res) => {
 });
 
 
-router.put('/api/courses/:id', (req, res) => {
+router.put('/:id', (req, res) => {
     //Look up the course
     //If not existing, return 404
     const course = courses.find((c) => c.id === parseInt(req.params.id));
@@ -81,7 +81,7 @@ function validateCourse(course) {
 
 //delete
 
-router.delete('/api/courses/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
     // Look up the course
     // Not existing, return 404
     const course = courses.find((c) => c.id === parseInt(req.params.id));
