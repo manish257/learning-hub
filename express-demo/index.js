@@ -3,11 +3,12 @@ const debug = require('debug')('app:startup');
 //const config = require('config');
 const morgan = require('morgan');
 const helmet = require('helmet');
-
 const Joi = require('joi');
 const logger = require('./logger');
 const express = require("express");
 const app = express();
+
+app.set('view engine', 'pug');
 
 // console.log(`NODE_ENV: ${process.env.NODE_ENV}`);
 // console.log(`app: ${app.get('env')}`);
