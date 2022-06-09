@@ -18,6 +18,7 @@ app.use(helmet());
 //Configuration
 console.log('Application Name: ' + config.get('name'));
 console.log('Mail Server: ' + config.get('mail.host'));
+console.log('Mail Password: ' + config.get('mail.password'));
 
 
 if (app.get('env') === 'development') {
