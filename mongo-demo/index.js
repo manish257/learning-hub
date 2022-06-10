@@ -28,8 +28,14 @@ async function createCourse() {
 
 
 async function getCourses() {
-    const courses = Course
-        .find({ author: 'Manish', isPublished: true });
+    const courses = await Course
+        //.find({ author: 'Manish', isPublished: true })
+        //.find({ price: { $gte: 10, $lte: 20 } })
+        .find({ price: { $in: [10, 15, 20] } })
+        // .or([ { author: 'Manish' }, { isPublished: true } ]) - use this with .find()
+        .limit(10)
+        .sort({ name: 1 })
+        .select({ name: 1, tags: 1 });
     console.log(courses);
 }
 
