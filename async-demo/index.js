@@ -1,29 +1,71 @@
 console.log('Before');
-getUser(1, getRepositories);
-console.log('After'); 
 
-function getRepositories(user) {
-    getRepositories(user.gitHubUsername, getCommits);
-}
+// Callback-based approach
+//
+// getUser(1, (user) => {
+//   getRepositories(user.gitHubUsername, (repos) => {
+//     getCommits(repos[0], (commits) => {
+//       console.log(commits);
+//     })
+//   })
+// });
 
-function getCommits(repos) {
-    getCommits(repo, displayCommits)
-}
+// Promise-based approach
+// getUser(1)
+//   .then(user => getRepositories(user.gitHubUsername))
+//   .then(repos => getCommits(repos[0]))
+//   .then(commits => console.log('Commits', commits))
+//   .catch(err => console.log('Error', err.message));
 
-function displayCommits(commits) {
+  // Async and await approach
+
+async function displayCommits() {
+
+  try{
+    const user = await getUser(1);
+    const repos = await getRepositories(user.gitHubUsername);
+    const commits = await getCommits(repos[0]);
     console.log(commits);
+  }
+
+  catch (err) {
+    console.log('Error', err.message);
+  }
 }
 
 
-function getUser(id, callback) {
+displayCommits();
+
+
+
+
+console.log('After');
+
+function getUser(id) {
+  return new Promise((resolve, reject) => {
+    // Kick off some async work 
     setTimeout(() => {
-        console.log('Reading a user from database...');
-        callback({ id: id, gitHubUsername: 'manish257' });
+      console.log('Reading a user from a database...');
+      resolve({ id: id, gitHubUsername: 'mosh' });
     }, 2000);
+  });
 }
 
-function getRepositories(username, callback) {
+function getRepositories(username) {
+  return new Promise((resolve, reject) => {
     setTimeout(() => {
-        callback(['repo1', 'repo2', 'repo3']);
+      console.log('Calling GitHub API...');
+      //resolve(['repo1', 'repo2', 'repo3']);
+      reject(new Error('Could not get the repos'));
+    }, 2000);  
+  });
+}
+
+function getCommits(repo) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      console.log('Calling GitHub API...');
+      resolve(['commit']);
     }, 2000);
+  });
 }
