@@ -33,6 +33,18 @@ async function getCourses() {
         //.find({ price: { $gte: 10, $lte: 20 } })
         .find({ price: { $in: [10, 15, 20] } })
         // .or([ { author: 'Manish' }, { isPublished: true } ]) - use this with .find()
+        
+        
+        // starts with Manish
+        // .find({ author: /^Manish/ })
+
+
+        // ends with Mahato
+        // .find({ author: /Mahato$/ })
+
+        //contains Manish anywhere
+        // .find({ author: /.*Manish.*/ })
+
         .limit(10)
         .sort({ name: 1 })
         .select({ name: 1, tags: 1 });
