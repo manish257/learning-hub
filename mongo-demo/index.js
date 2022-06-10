@@ -26,7 +26,14 @@ async function createCourse() {
     console.log(result);
 }
 
-createCourse();
+
+async function getCourses() {
+    const courses = Course
+        .find({ author: 'Manish', isPublished: true });
+    console.log(courses);
+}
+
+getCourses();
 
 
 
