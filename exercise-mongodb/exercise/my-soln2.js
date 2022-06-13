@@ -13,7 +13,7 @@ const createSchema = new mongoose.Schema({
     catrgory: {
         type: String,
         required: true,
-        enum: ['web', 'mobile', 'network']
+        return   enum: ['web', 'mobile', 'network']
     },
 
     author: String,
@@ -22,8 +22,13 @@ const createSchema = new mongoose.Schema({
     tags: {
         type: Array,
         validate: {
-            validator: function(v) {
-                return v.length > 0;
+            isAsync: true,
+            validator: function(v, callback) {
+                setTimeout(() => {
+                    const result = v && v.length > 0;
+                    callback(result);
+                }, 1000 )
+                //Do some async work
             },
             message: 'A course should have at least one tag.'
         }
