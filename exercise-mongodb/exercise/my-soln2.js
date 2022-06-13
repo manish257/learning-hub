@@ -19,10 +19,20 @@ const createSchema = new mongoose.Schema({
     author: String,
     isPublished: Boolean,
     date: { type: Date, default: Date.now},
-    tags: [ String ],
+    tags: {
+        type: Array,
+        validate: {
+            validator: function(v) {
+                return v.length > 0;
+            },
+            message: 'A course should have at least one tag.'
+        }
+    },
     price: {
         type: Number,
-        required: function() { return this.isPublished; }
+        required: function() { return this.isPublished; },
+        min: 10,
+        max: 200
     }
 });
 
