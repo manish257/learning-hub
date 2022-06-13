@@ -29,6 +29,9 @@ async function run() {
 
 run();
 
+
+//Query first approach to update any document
+
 async function updateCourse(id) {
     const course = await Course.findById(id);
     if (!course) return;
@@ -48,3 +51,18 @@ async function updateCourse(id) {
 }
 
 updateCourse('5a68fdc3615eda645bc6bdec');
+
+
+// second approach
+
+// async function updateCourse(id) {
+//     const course = await Course.findByIdAndUpdate(id, {
+//         $set: {
+//             author: 'Jason',
+//             isPublished: false
+//         }
+
+//     }, { new: true } );
+//     console.log(course);
+// }
+// updateCourse('5a68fdc3615eda645bc6bdec');
