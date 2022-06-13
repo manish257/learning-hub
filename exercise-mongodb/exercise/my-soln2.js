@@ -16,13 +16,13 @@ const Course = mongoose.model('Course', createSchema);
 
 async function getCourse() {
     return await Course
-    .find({ isPublished: true, tags: ['frontend', 'backend'] })
+    .find({ isPublished: true, tags: { $in: ['frontend', 'backend'] } })
     .sort({ price: -1 })
     .select({ name: 1, author: 1 })
 }
 
 async function run() {
-    const courses = await getCourses();
+    const courses = await getCourse();
     console.log(courses);
 }
 
