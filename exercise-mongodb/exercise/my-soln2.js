@@ -3,12 +3,27 @@ const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/mongo-exercises');
 
 const createSchema = new mongoose.Schema({
-    name: String,
+    name: { 
+        type: String,
+        required: true,
+        minlength: 5,
+        maxlength: 255,
+        // matach: /pattern/
+    },
+    catrgory: {
+        type: String,
+        required: true,
+        enum: ['web', 'mobile', 'network']
+    },
+
     author: String,
     isPublished: Boolean,
-    date: Date,
-    price: Number,
-    tags: [ String ]
+    date: { type: Date, default: Date.now},
+    tags: [ String ],
+    price: {
+        type: Number,
+        required: function() { return this.isPublished; }
+    }
 });
 
 
@@ -69,10 +84,10 @@ updateCourse('5a68fdc3615eda645bc6bdec');
 
 // Removing documents
 
-async function removeCourse(id) {
-    const result = await Course.deleteMany({ _id: id });
-    const course = await Course.findByIdAndRemove(id);
-    console.log(result);
-}
+// async function removeCourse(id) {
+//     const result = await Course.deleteMany({ _id: id });
+//     const course = await Course.findByIdAndRemove(id);
+//     console.log(result);
+// }
 
-removeCourse('5a68fdc3615eda645bc6bdec');
+// removeCourse('5a68fdc3615eda645bc6bdec');
