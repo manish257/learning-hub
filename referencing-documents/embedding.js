@@ -47,9 +47,14 @@ async function addAuthor(courseId, author) {
   course.save();
 }
 
-
-
-addAuthor('62a85b27187f65ccb178f8eb', new Author({ name: 'Jagdamaba' }));
+async function removeAuthor(courseId, authorId) {
+  const course = await Course.findById(courseId);
+  const author = course.authors.id(authorId);
+  author.remove();
+  course.save();
+}
+removeAuthor('62a85b27187f65ccb178f8eb', '62a85b27187f65ccb178f8ea');
+//addAuthor('62a85b27187f65ccb178f8eb', new Author({ name: 'Jagdamaba' }));
 
 // createCourse('Node Course', 
 //   [new Author({ name: 'Manish' }),
