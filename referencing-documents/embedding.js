@@ -48,6 +48,7 @@ async function addAuthor(courseId, author) {
 }
 
 
+
 addAuthor('62a85b27187f65ccb178f8eb', new Author({ name: 'Jagdamaba' }));
 
 // createCourse('Node Course', 
