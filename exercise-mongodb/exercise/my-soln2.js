@@ -10,10 +10,10 @@ const createSchema = new mongoose.Schema({
         maxlength: 255,
         // matach: /pattern/
     },
-    catrgory: {
+    category: {
         type: String,
         required: true,
-        return   enum: ['web', 'mobile', 'network']
+        enum: ['web', 'mobile', 'network']
     },
 
     author: String,
