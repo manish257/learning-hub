@@ -12,6 +12,10 @@ const Author = mongoose.model('Author', new mongoose.Schema({
 
 const Course = mongoose.model('Course', new mongoose.Schema({
   name: String,
+  author: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Author'
+  }
 }));
 
 async function createAuthor(name, bio, website) { 
@@ -42,8 +46,8 @@ async function listCourses() {
   console.log(courses);
 }
 
-createAuthor('Mosh', 'My bio', 'My Website');
+// createAuthor('Manish', 'My bio', 'My Website');
 
-// createCourse('Node Course', 'authorId')
+createCourse('Node Course', '62a8425e66d52c93f65db063')
 
 // listCourses();
