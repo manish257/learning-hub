@@ -14,13 +14,13 @@ const Author = mongoose.model('Author', authorSchema);
 
 const Course = mongoose.model('Course', new mongoose.Schema({
   name: String,
-  author:authorSchema
+  authors:[authorSchema]
 }));
 
-async function createCourse(name, author) {
+async function createCourse(name, authors) {
   const course = new Course({
     name, 
-    author
+    authors
   }); 
   
   const result = await course.save();
@@ -33,14 +33,25 @@ async function listCourses() {
 }
 
 
-async function updateAuthor(courseId) {
-  const course = await Course.updateOne({ _id: courseId }, {
-    $set: {
-      'author.name': 'Manish Mahato'
-    }
-  });
+// async function updateAuthor(courseId) {
+//   const course = await Course.updateOne({ _id: courseId }, {
+//     $set: {
+//       'author.name': 'Manish Mahato'
+//     }
+//   });
+// }
+
+async function addAuthor(courseId, author) {
+  const course = await Course.findById(courseId);
+  course.authors.push(author);
+  course.save();
 }
 
-//createCourse('Node Course', new Author({ name: 'Manish' }));
 
-updateAuthor('62a85270cdec6f5ba491f944');
+addAuthor('62a85b27187f65ccb178f8eb', new Author({ name: 'Jagdamaba' }));
+
+// createCourse('Node Course', 
+//   [new Author({ name: 'Manish' }),
+//   new Author({ name: 'Aman' })]);
+
+//updateAuthor('62a85270cdec6f5ba491f944');
