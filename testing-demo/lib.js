@@ -1,17 +1,17 @@
 // const db = require('./db');
 // const mail = require('./mail');
 
-// Testing numbers 
+//Testing numbers 
 module.exports.absolute = function(number) {
   return (number >= 0) ? number : -number; 
   //if (number < 0) return -number; 
   return -number; 
 }
 
-// // Testing strings 
-// module.exports.greet = function(name) { 
-//   return 'Welcome ' + name; 
-// }
+// Testing strings 
+module.exports.greet = function(name) { 
+  return 'Welcome ' + name; 
+}
 
 // // Testing arrays 
 // module.exports.getCurrencies = function() { 
