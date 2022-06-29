@@ -1,3 +1,7 @@
 import { combineReducers } from "redux";
 
-export default combineReducers({});
+export default combineReducers({
+    //dummy reducer
+    replaceMe: () => 'hi there'
+
+});
