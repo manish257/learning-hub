@@ -1,14 +1,13 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
 
 const PageOne = () => {
     return( 
         <div>
             PageOne
-            {/* BAD */}
-            <a href='/pagetwo'>
+            <Link to='/pagetwo'>
                 Navigate to PAGE TWO
-            </a>
+            </Link>
         </div>
     );
 };
@@ -18,14 +17,11 @@ const PageTwo = () => {
         <div>
             PageTwo
             <br />
-            <br />
             <button>
-            {/* BAD */}
-                <a href='/'>
+                <Link to='/'>
                     Navigate to PAGE ONE
-                </a>
+                </Link>
             </button>
-            
         </div>
     );
 };
