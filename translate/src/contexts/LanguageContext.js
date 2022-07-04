@@ -1,4 +1,3 @@
 import React, { createContext } from 'react';
 
-export default React.createContext('english');
-
+export default React.createContext('nepali');
