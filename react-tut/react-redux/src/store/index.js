@@ -1,3 +1,4 @@
+//CODE WITH REDUX TOOLKIT
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 
 const counterSlice = createSlice({
